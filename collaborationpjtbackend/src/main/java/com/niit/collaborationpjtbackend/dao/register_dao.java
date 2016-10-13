@@ -3,7 +3,6 @@ package com.niit.collaborationpjtbackend.dao;
 import java.util.List;
 
 import com.niit.collaborationpjtbackend.model.register;
-import com.niit.collaborationpjtbackend.model.userlogin;
 
 public interface register_dao {
 	
@@ -21,8 +20,6 @@ public interface register_dao {
 	
 	public void updatepassword(String userid,String password);
 	
-	public userlogin getdetailsbyid(String userid); 
 	
-	public void saveuser(userlogin u);
 
 }

@@ -14,8 +14,13 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.collaborationpjtbackend.model.blogcomments;
 import com.niit.collaborationpjtbackend.model.blogmaster;
+import com.niit.collaborationpjtbackend.model.eventmaster;
+import com.niit.collaborationpjtbackend.model.forumcomments;
+import com.niit.collaborationpjtbackend.model.forummaster;
 import com.niit.collaborationpjtbackend.model.register;
+import com.niit.collaborationpjtbackend.model.role;
 
 
 
@@ -53,7 +58,13 @@ public class Applicationconfig {
 	LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(dataSource);
 	sessionBuilder.addProperties(getHibernateProperties());
 	sessionBuilder.addAnnotatedClass(blogmaster.class);
+	sessionBuilder.addAnnotatedClass(blogcomments.class);
 	sessionBuilder.addAnnotatedClass(register.class);
+	sessionBuilder.addAnnotatedClass(role.class);
+	sessionBuilder.addAnnotatedClass(forummaster.class);
+	sessionBuilder.addAnnotatedClass(forumcomments.class);
+	sessionBuilder.addAnnotatedClass(eventmaster.class);
+	
 	return sessionBuilder.buildSessionFactory();
 	}
 	

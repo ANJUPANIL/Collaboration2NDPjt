@@ -5,6 +5,8 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -29,26 +31,43 @@ public class blogmaster {
 	private String blog_content;
 	
 	@Column
+	@NotEmpty(message="Please select a valid blog type")
+	private String blog_type;
+	
+	public String getBlog_type() {
+		return blog_type;
+	}
+
+	public void setBlog_type(String blog_type) {
+		this.blog_type = blog_type;
+	}
+
+	@Column
 	@NotEmpty(message="Please enter a valid blog date")
 	private String blog_date;
 	
 	@Column
-	@NotEmpty(message="Please enter a valid blog content")
-	private String userid;
-	
-	
-	@Column
 	@NotEmpty
 	private String status;
-
 	
-
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private register user;
+	
 	public String getBlog_date() {
 		return blog_date;
 	}
 
 	public void setBlog_date(String blog_date) {
 		this.blog_date = blog_date;
+	}
+
+	public register getUser() {
+		return user;
+	}
+
+	public void setUser(register user) {
+		this.user = user;
 	}
 
 	public String getStatus() {
@@ -86,7 +105,4 @@ public class blogmaster {
 	public blogmaster() {
 		this.blog_id = "BLG" + UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
-	
-	
-
 }

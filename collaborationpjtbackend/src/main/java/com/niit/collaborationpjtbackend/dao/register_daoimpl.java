@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.register;
-import com.niit.collaborationpjtbackend.model.userlogin;
 
 @Repository
 @Transactional
@@ -66,18 +65,6 @@ public class register_daoimpl implements register_dao{
 		
 	}
 
-	@Override
-	public userlogin getdetailsbyid(String userid) {
-		return (userlogin) sessionFactory.getCurrentSession().get(userlogin.class, new String(userid));
-	}
-
-	@Override
-	public void saveuser(userlogin u) {
-		
-		
-		sessionFactory.getCurrentSession().save(u);
-		sessionFactory.getCurrentSession().flush();
-		
-	}
+	
 
 }

@@ -1,8 +1,14 @@
 package com.niit.collaborationpjtbackend.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -46,9 +52,7 @@ public class register {
 	@Size(min=10,max=10,message = "Enter 10 digit contact number")
 	private String contact;
 	
-	@Column
-	@NotEmpty(message="Please select your role")
-	private String role;
+	
 	
 	@Column
 	@NotEmpty(message="Please enter your password")
@@ -59,6 +63,40 @@ public class register {
 	@NotEmpty(message="Please enter your profile created date")
 	private String createddate;
 	
+	@Column
+	private String modifieddate;
+	
+	@Column
+	private String userimage;
+	
+	public role getUser_role() {
+		return user_role;
+	}
+
+	public void setUser_role(role user_role) {
+		this.user_role = user_role;
+	}
+
+	@OneToOne
+	@JoinColumn(name="role_id")
+	private role user_role;
+	
+	public String getModifieddate() {
+		return modifieddate;
+	}
+
+	public void setModifieddate(String modifieddate) {
+		this.modifieddate = modifieddate;
+	}
+
+	public String getUserimage() {
+		return userimage;
+	}
+
+	public void setUserimage(String userimage) {
+		this.userimage = userimage;
+	}
+
 	@Column
 	@NotEmpty
 	private String status;
@@ -127,14 +165,7 @@ public class register {
 		this.contact = contact;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -150,5 +181,11 @@ public class register {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="blog_id")
+    private Set<blogmaster> blog;
+    
+    
 	
 }

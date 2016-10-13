@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.niit.collaborationpjtbackend.dao.register_dao;
 import com.niit.collaborationpjtbackend.model.register;
-import com.niit.collaborationpjtbackend.model.userlogin;
 
 @Controller
 public class register_controller {
@@ -26,26 +25,14 @@ public class register_controller {
 		r.setAddress("Plakkat house");
 		r.setContact("8140772999");
 		r.setPassword("anjupanil");
-		r.setRole("Student");
+		//r.setRole("Student");
 		r.setStatus("registered");
 		r.setCreateddate("8/10/2016");
 		reg.saveuserdetails(r);
 		return "index";
 	}
 	
-	@RequestMapping(value="/approve")
-	public String savelogin()
-	{
-		userlogin u =new userlogin();
-		
-		u.setUser_id("admin@gmail.com");
-		u.setPassword("admin123");
-		u.setRole("Admin");
-		reg.saveuser(u);
-		return "index";
-
 	
-	}
 	
 	
 
