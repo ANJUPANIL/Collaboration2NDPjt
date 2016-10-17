@@ -3,6 +3,7 @@ package com.niit.collaborationpjtbackend.dao;
 import java.util.List;
 
 import com.niit.collaborationpjtbackend.model.register;
+import com.niit.collaborationpjtbackend.model.role;
 
 public interface register_dao {
 	
@@ -19,6 +20,8 @@ public interface register_dao {
 	public boolean isvaliduser(String userid,String password);
 	
 	public void updatepassword(String userid,String password);
+	
+	public void saverole(role role);
 	
 	
 

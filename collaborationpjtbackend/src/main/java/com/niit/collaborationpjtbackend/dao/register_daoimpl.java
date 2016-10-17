@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.register;
+import com.niit.collaborationpjtbackend.model.role;
 
 @Repository
 @Transactional
@@ -18,7 +19,7 @@ public class register_daoimpl implements register_dao{
 	@SuppressWarnings("unchecked" )
 	@Override
 	public List<register> alluserdetails() {
-		return (List<register>)sessionFactory.getCurrentSession().createQuery("from userdetails").list();
+		return (List<register>)sessionFactory.getCurrentSession().createQuery("from register").list();
 	}
 
 	@Override
@@ -63,6 +64,11 @@ public class register_daoimpl implements register_dao{
 	public void updatepassword(String userid, String password) {
 		sessionFactory.getCurrentSession().createQuery("update register set password='"+password+"' where user_id = '"+userid+"'").executeUpdate();
 		
+	}
+
+	@Override
+	public void saverole(role role) {
+		sessionFactory.getCurrentSession().save(role);
 	}
 
 	

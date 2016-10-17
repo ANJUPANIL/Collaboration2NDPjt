@@ -19,6 +19,8 @@ import com.niit.collaborationpjtbackend.model.blogmaster;
 import com.niit.collaborationpjtbackend.model.eventmaster;
 import com.niit.collaborationpjtbackend.model.forumcomments;
 import com.niit.collaborationpjtbackend.model.forummaster;
+import com.niit.collaborationpjtbackend.model.friends;
+import com.niit.collaborationpjtbackend.model.jobcarrier;
 import com.niit.collaborationpjtbackend.model.register;
 import com.niit.collaborationpjtbackend.model.role;
 
@@ -64,7 +66,8 @@ public class Applicationconfig {
 	sessionBuilder.addAnnotatedClass(forummaster.class);
 	sessionBuilder.addAnnotatedClass(forumcomments.class);
 	sessionBuilder.addAnnotatedClass(eventmaster.class);
-	
+	sessionBuilder.addAnnotatedClass(friends.class);
+	sessionBuilder.addAnnotatedClass(jobcarrier.class);
 	return sessionBuilder.buildSessionFactory();
 	}
 	

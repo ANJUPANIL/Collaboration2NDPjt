@@ -89,7 +89,7 @@ public class eventmaster {
 	}
 	
 	public eventmaster() {
-		this.event_id = "BLG" + UUID.randomUUID().toString().substring(30).toUpperCase();
+		this.event_id = "EVNT" + UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
 	
 	

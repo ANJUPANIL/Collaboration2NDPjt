@@ -102,6 +102,6 @@ public class forummaster {
 	private register user;
 
 	public forummaster() {
-		this.forum_id = "BLG" + UUID.randomUUID().toString().substring(30).toUpperCase();
+		this.forum_id = "FRM" + UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
 }

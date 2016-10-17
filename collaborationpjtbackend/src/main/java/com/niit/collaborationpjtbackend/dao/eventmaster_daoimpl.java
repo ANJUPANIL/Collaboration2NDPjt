@@ -43,7 +43,7 @@ public class eventmaster_daoimpl implements eventmaster_dao {
 
 	@Override
 	public void deleteevent(String id) {
-		sessionFactory.getCurrentSession().createQuery("update eventmaster set status=false where brand_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update eventmaster set status=false where event_id = '"+id+"'").executeUpdate();
 		
 	}
 

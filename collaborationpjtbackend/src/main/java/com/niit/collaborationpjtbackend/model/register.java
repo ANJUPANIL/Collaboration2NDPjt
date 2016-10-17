@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="Register")
 @Component
-public class register {
+public class register extends BaseDomain {
 	
 	@Id
 	@Column

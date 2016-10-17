@@ -43,7 +43,7 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 
 	@Override
 	public void deleteblog(String id) {
-		sessionFactory.getCurrentSession().createQuery("update blogmaster set status=false where brand_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update blogmaster set status=false where blog_id = '"+id+"'").executeUpdate();
 		
 	}
 
