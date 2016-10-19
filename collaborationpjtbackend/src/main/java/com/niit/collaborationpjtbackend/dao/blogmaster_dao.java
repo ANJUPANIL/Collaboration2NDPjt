@@ -17,4 +17,6 @@ public interface blogmaster_dao {
 	public void updateblog(blogmaster blog);
 	
 	public void deleteblog(String id);
+	
+	public void adminapprove(String id);
 }

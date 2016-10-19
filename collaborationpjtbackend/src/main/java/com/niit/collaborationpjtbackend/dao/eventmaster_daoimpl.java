@@ -5,12 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.eventmaster;
 
-
-
 @Repository
+@Transactional
 public class eventmaster_daoimpl implements eventmaster_dao {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class eventmaster_daoimpl implements eventmaster_dao {
 	@Override
 	public List<eventmaster> showallevent() {
 		
-		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster where status=true").list();
+		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster where status='active'").list();
 	}
 
 	@Override

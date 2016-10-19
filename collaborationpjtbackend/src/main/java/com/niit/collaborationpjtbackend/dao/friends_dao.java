@@ -10,7 +10,9 @@ public interface friends_dao {
 
 	public void savefriends(friends friends);
 	
-	public List<friends> showallfriends();
+	public List<friends> showallfriends(String userid);
+	
+	public List<friends> shownewfriendrequests(String userid);
 	
 	public friends getfriendsbyid(String id);
 	

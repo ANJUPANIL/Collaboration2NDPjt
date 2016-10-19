@@ -5,12 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.jobcarrier;
 
-
-
 @Repository
+@Transactional
 public class jobcarrier_daoimpl implements jobcarrier_dao {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class jobcarrier_daoimpl implements jobcarrier_dao {
 	@Override
 	public List<jobcarrier> showalljob() {
 		
-		return (List<jobcarrier>)sessionFactory.getCurrentSession().createQuery("from jobcarrier where status=true").list();
+		return (List<jobcarrier>)sessionFactory.getCurrentSession().createQuery("from jobcarrier where status='active'").list();
 	}
 
 	@Override

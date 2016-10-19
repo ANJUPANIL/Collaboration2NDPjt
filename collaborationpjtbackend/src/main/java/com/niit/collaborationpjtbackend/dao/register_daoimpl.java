@@ -30,6 +30,7 @@ public class register_daoimpl implements register_dao{
 
 	@Override
 	public void updateuserdetails(register details) {
+		System.out.println("Update dao :" + details.getUser_id());
 		sessionFactory.getCurrentSession().update(details);
 		
 	}
@@ -42,12 +43,20 @@ public class register_daoimpl implements register_dao{
 
 	@Override
 	public register getuserdetailsbyid(String id) {
+		System.out.println("get user by id dao :" + id);
 		return (register) sessionFactory.getCurrentSession().get(register.class, new String(id));
 	}
 
 	@Override
 	public boolean isvaliduser(String userid, String password) {
+		System.out.println("Valid user dao"+userid + password);
 		register u = (register) sessionFactory.getCurrentSession().get(register.class, new String(userid));
+		if(u==null)
+		{
+			return false;
+		}
+		else
+		{
 		if(u.getUser_id().equals(userid) && u.getPassword().equals(password))
 		{
 			return true;
@@ -55,6 +64,7 @@ public class register_daoimpl implements register_dao{
 		else
 		{
 			return false;
+		}
 		}
 	}
 

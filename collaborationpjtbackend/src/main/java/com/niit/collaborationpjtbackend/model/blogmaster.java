@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="Blogmaster")
 @Component
-public class blogmaster {
+public class blogmaster extends BaseDomain {
 	
 	@Id
 	@Column
@@ -30,17 +30,6 @@ public class blogmaster {
 	@NotEmpty(message="Please enter a valid blog content")
 	private String blog_content;
 	
-	@Column
-	@NotEmpty(message="Please select a valid blog type")
-	private String blog_type;
-	
-	public String getBlog_type() {
-		return blog_type;
-	}
-
-	public void setBlog_type(String blog_type) {
-		this.blog_type = blog_type;
-	}
 
 	@Column
 	@NotEmpty(message="Please enter a valid blog date")

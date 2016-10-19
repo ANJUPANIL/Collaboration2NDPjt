@@ -27,7 +27,7 @@ public class friends {
 	
 	@Column
 	@NotEmpty(message="Please enter a valid user")
-	private String requestto;
+	private String userid;
 	
 	@Column
 	@NotEmpty(message="Please enter a valid friend request date")
@@ -62,13 +62,16 @@ public class friends {
 	}
 
 
-	public String getRequestto() {
-		return requestto;
+	
+
+
+	public String getUserid() {
+		return userid;
 	}
 
 
-	public void setRequestto(String requestto) {
-		this.requestto = requestto;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 

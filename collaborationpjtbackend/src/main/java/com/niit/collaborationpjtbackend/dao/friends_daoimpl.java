@@ -2,15 +2,16 @@ package com.niit.collaborationpjtbackend.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.friends;
 
-
-
 @Repository
+@Transactional
 public class friends_daoimpl implements friends_dao {
 	
 	@Autowired
@@ -24,9 +25,15 @@ public class friends_daoimpl implements friends_dao {
 	
 	@SuppressWarnings("unchecked" )
 	@Override
-	public List<friends> showallfriends() {
+	public List<friends> showallfriends(String userid) {
 		
-		return (List<friends>)sessionFactory.getCurrentSession().createQuery("from friends where status=true").list();
+		String hql="from friends where userid"+ "'" + userid +"'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<friends> list=(List<friends>) query.list();
+		
+		return list;
+		
+		//return (List<friends>)sessionFactory.getCurrentSession().createQuery("from friends where status='active'").list();
 	}
 
 	@Override
@@ -45,6 +52,17 @@ public class friends_daoimpl implements friends_dao {
 	public void deletefriends(String id) {
 		sessionFactory.getCurrentSession().createQuery("update friends set status=false where fid = '"+id+"'").executeUpdate();
 		
+	}
+
+	@SuppressWarnings("unchecked" )
+	@Override
+	public List<friends> shownewfriendrequests(String userid) {
+		
+		String hql="from friends where userid"+ "'" + userid +"' and status ='" +"New'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+		List<friends> list=(List<friends>) query.list();
+		
+		return list;
 	}
 
 }

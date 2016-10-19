@@ -182,10 +182,5 @@ public class register extends BaseDomain {
 		this.status = status;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="blog_id")
-    private Set<blogmaster> blog;
-    
-    
 	
 }

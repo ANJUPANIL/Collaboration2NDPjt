@@ -24,7 +24,7 @@ public class register_controller {
 	register_dao regdao;
 	
 	
-	@RequestMapping(value="/users", method=RequestMethod.GET)
+	@RequestMapping(value="/allusers", method=RequestMethod.GET)
 	public ResponseEntity<List<register>> listallusers()
 	{
 		List<register> users =regdao.alluserdetails();
@@ -48,15 +48,17 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/user/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<register> updateuser(@PathVariable("id") String id,@RequestBody register user)
 	{
+		System.out.println("Update user :" + id);
 		if(regdao.getuserdetailsbyid(id)==null)
 		{
 			user =new register();
-			user.setErrorMessage("User does not exist with id : "+user.getUser_id());
+			user.setErrorMessage("User does not exist with id : "+ id);
 			return new ResponseEntity<register>(user,HttpStatus.NOT_FOUND);
 		}
+		System.out.println("Update user name :" + user.getFname());
 		regdao.updateuserdetails(user);
 		 
 		return new ResponseEntity<register>(user,HttpStatus.OK);
@@ -94,7 +96,7 @@ public class register_controller {
 	@RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
 	public ResponseEntity<register> authenticate(@RequestBody register user,HttpSession session)
 	{
-		
+		System.out.println("Authenicate "+user.getUser_id());
 		if(regdao.isvaliduser(user.getUser_id(), user.getPassword())==false)
 		{
 			user =new register();
@@ -112,7 +114,7 @@ public class register_controller {
 	
 	
 	
-	
+/*	
 	@RequestMapping(value="/saverole", method=RequestMethod.POST)
 	public ResponseEntity<role> saverole(@RequestBody role r)
 	{
@@ -122,7 +124,7 @@ public class register_controller {
 		return new ResponseEntity<role>(r,HttpStatus.OK);
 	}
 	
-	
+	*/
 	
 	
 	

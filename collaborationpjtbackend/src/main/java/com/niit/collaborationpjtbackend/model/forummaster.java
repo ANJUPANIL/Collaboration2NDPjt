@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="Forummaster")
 @Component
-public class forummaster {
+public class forummaster extends BaseDomain{
 	@Id
 	@Column
 	@NotEmpty(message="Please enter a valid forum Id")
@@ -24,14 +24,6 @@ public class forummaster {
 	@Column
 	@NotEmpty(message="Please enter a valid forum title")
 	private String forum_title;
-	
-	public String getForum_type() {
-		return forum_type;
-	}
-
-	public void setForum_type(String forum_type) {
-		this.forum_type = forum_type;
-	}
 
 	@Column
 	@NotEmpty(message="Please enter a valid forum content")
@@ -41,9 +33,6 @@ public class forummaster {
 	@NotEmpty(message="Please enter a valid forum date")
 	private String forum_date;
 	
-	@Column
-	@NotEmpty(message="Please enter a valid forum type")
-	private String forum_type;
 	
 	public String getForum_id() {
 		return forum_id;

@@ -5,12 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationpjtbackend.model.forummaster;
 
-
-
 @Repository
+@Transactional
 public class forummaster_daoimpl implements forummaster_dao {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class forummaster_daoimpl implements forummaster_dao {
 	@Override
 	public List<forummaster> showallforum() {
 		
-		return (List<forummaster>)sessionFactory.getCurrentSession().createQuery("from forummaster where status=true").list();
+		return (List<forummaster>)sessionFactory.getCurrentSession().createQuery("from forummaster where status='active'").list();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class forummaster_daoimpl implements forummaster_dao {
 
 	@Override
 	public void deleteforum(String id) {
-		sessionFactory.getCurrentSession().createQuery("update forummaster set status=false where forum_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update forummaster set status='decative' where forum_id = '"+id+"'").executeUpdate();
 		
 	}
 
