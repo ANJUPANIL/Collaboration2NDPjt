@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="Eventmaster")
 @Component
-public class eventmaster {
+public class eventmaster extends BaseDomain{
 	
 	@Id
 	@Column

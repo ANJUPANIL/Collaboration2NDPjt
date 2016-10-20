@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.forummaster_dao;
+import com.niit.collaborationpjtbackend.model.blogmaster;
 import com.niit.collaborationpjtbackend.model.forummaster;
-import com.niit.collaborationpjtbackend.model.register;
 
 @RestController
 public class forum_controller {
@@ -62,6 +62,15 @@ public class forum_controller {
 		
 		return new ResponseEntity<forummaster>(HttpStatus.OK);
 		
+	}
+	
+	@RequestMapping(value="/showforumbyid/{id}", method=RequestMethod.GET)
+	public ResponseEntity<forummaster> getuser(@PathVariable("id") String id)
+	{
+		
+		forummaster forum =forumdao.getforumbyid(id);
+		 
+		return new ResponseEntity<forummaster>(forum,HttpStatus.OK);
 	}
 	
 

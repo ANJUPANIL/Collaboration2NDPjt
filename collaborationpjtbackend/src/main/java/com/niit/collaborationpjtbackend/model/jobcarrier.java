@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Table
 @Component
 
-public class jobcarrier {
+public class jobcarrier extends BaseDomain{
 	
 	@Id
 	@Column

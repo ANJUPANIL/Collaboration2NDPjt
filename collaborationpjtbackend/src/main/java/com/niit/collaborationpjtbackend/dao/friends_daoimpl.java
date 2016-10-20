@@ -37,7 +37,7 @@ public class friends_daoimpl implements friends_dao {
 	}
 
 	@Override
-	public friends getfriendsbyid(String id) {
+	public friends getfriendbyid(String id) {
 		
 		return (friends) sessionFactory.getCurrentSession().get(friends.class, new String(id));
 	}

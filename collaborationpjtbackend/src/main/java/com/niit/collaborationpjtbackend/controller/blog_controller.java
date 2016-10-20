@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.blogmaster_dao;
 import com.niit.collaborationpjtbackend.model.blogmaster;
-import com.niit.collaborationpjtbackend.model.register;
+import com.niit.collaborationpjtbackend.model.jobcarrier;
 
 @RestController
 public class blog_controller {
@@ -72,6 +72,16 @@ public class blog_controller {
 		
 		return new ResponseEntity<blogmaster>(HttpStatus.OK);
 		
+	}
+	
+	
+	@RequestMapping(value="/showblogbyid/{id}", method=RequestMethod.GET)
+	public ResponseEntity<blogmaster> getuser(@PathVariable("id") String id)
+	{
+		
+		blogmaster blog =blogdao.getblogbyid(id);
+		 
+		return new ResponseEntity<blogmaster>(blog,HttpStatus.OK);
 	}
 	
 

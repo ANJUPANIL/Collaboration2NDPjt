@@ -14,7 +14,7 @@ public interface friends_dao {
 	
 	public List<friends> shownewfriendrequests(String userid);
 	
-	public friends getfriendsbyid(String id);
+	public friends getfriendbyid(String id);
 	
 	public void updatefriends(friends friends);
 	
