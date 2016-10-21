@@ -27,7 +27,7 @@ public class friends_daoimpl implements friends_dao {
 	@Override
 	public List<friends> showallfriends(String userid) {
 		
-		String hql="from friends where userid"+ "'" + userid +"'";
+		String hql="from friends where userid"+ "'" + userid +"' and status='"+"Accepted'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<friends> list=(List<friends>) query.list();
 		
