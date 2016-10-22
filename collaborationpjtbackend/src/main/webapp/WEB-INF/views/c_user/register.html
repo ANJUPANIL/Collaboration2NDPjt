@@ -1,0 +1,83 @@
+
+<body>
+<div class="generic-container" ng-controller="UserController as ctrl">
+
+<div ng-show='ctrl.user.errorMessage!=""  '>
+<div class="alert alert-danger fade in">Error : {{ctrl.user.errorMessage}}</div>
+</div>
+
+<section id="login">
+    <div class="container">
+    	<div class="row">
+    	    <div class="col-xs-12">
+        	    <div class="form-wrap">
+                <h1>Create Account</h1>
+                
+                    <form ng-submit="ctrl.submit()" name="myForm" class="form-horizondal">
+                    
+                    	<div class="form-group">
+                    		<label for="role">Register As...</label>
+                            <label  class="radio-inline">
+                            <input type="radio" name="role" value="student" ng-model="ctrl.user.role">Student
+                            </label>
+                            
+                            <label  class="radio-inline">
+                            <input type="radio" name="role" value="alumni" ng-model="ctrl.user.role">Alumni
+                            </label>
+                            
+                            <label  class="radio-inline">
+                            <input type="radio" name="role" value="employee" ng-model="ctrl.user.role">Employee
+                            </label>
+                        </div>
+                        <div class="form-group">
+                        	<div class="col-sm-4 form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" name="fname" id="fname" ng-model="ctrl.user.fname" class="form-control" autofocus required>
+                           </div>
+                           
+                           <div class="col-sm-4 form-group">
+                            <label for="mname">Middle Name</label>
+                            <input type="text" name="mname" id="mname" ng-model="ctrl.user.mname" class="form-control" autofocus required>
+                           </div>
+                           
+                           <div class="col-sm-4 form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" name="lname" id="lname" ng-model="ctrl.user.lname" class="form-control" autofocus required>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dob">Date Of Birth</label>
+                            <input type="text" name="dob" id="dob" ng-model="ctrl.user.dob" class="form-control" autofocus required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" name="addres" id="address" ng-model="ctrl.user.address" class="form-control" autofocus required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact">Contact Number</label>
+                            <input type="text" name="contact" id="contact" ng-model="ctrl.user.contact" class="form-control" autofocus required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user_id" class="sr-only">Email</label>
+                            <input type="email" name="user_id" id="user_id" ng-model="ctrl.user.user_id"  class="form-control" placeholder="somebody@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" >Password</label>
+                            <input type="password" name="password" id="password" ng-model="ctrl.user.password" class="form-control" placeholder="Password">
+                        </div>
+                        
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
+                    </form>
+                    
+                    <hr>
+        	    </div>
+    		</div> <!-- /.col-xs-12 -->
+    	</div> <!-- /.row -->
+    </div> <!-- /.container -->
+</section>
+</div>
+</body>

@@ -21,7 +21,6 @@ public class register_controller {
 	@Autowired
 	register_dao regdao;
 	
-	
 	@RequestMapping(value="/allusers", method=RequestMethod.GET)
 	public ResponseEntity<List<register>> listallusers()
 	{
