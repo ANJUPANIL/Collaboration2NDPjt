@@ -39,9 +39,9 @@ public class blogmaster extends BaseDomain {
 	@NotEmpty
 	private String status;
 	
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private register user;
+	@Column
+	@NotEmpty(message="Please enter a valid user id ")
+	private String user_id;
 	
 	public String getBlog_date() {
 		return blog_date;
@@ -51,12 +51,14 @@ public class blogmaster extends BaseDomain {
 		this.blog_date = blog_date;
 	}
 
-	public register getUser() {
-		return user;
+	
+
+	public String getUser() {
+		return user_id;
 	}
 
-	public void setUser(register user) {
-		this.user = user;
+	public void setUser(String user) {
+		this.user_id = user;
 	}
 
 	public String getStatus() {

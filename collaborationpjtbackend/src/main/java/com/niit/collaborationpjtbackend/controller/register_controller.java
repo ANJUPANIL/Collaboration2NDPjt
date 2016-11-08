@@ -1,5 +1,8 @@
 package com.niit.collaborationpjtbackend.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,6 +41,12 @@ public class register_controller {
 	{
 		if(regdao.getuserdetailsbyid(user.getUser_id())==null)
 		{
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
+			System.out.println(dateFormat.format(date));
+			String cdate=dateFormat.format(date);
+			user.setCreateddate(cdate);
+			user.setStatus("New");
 			regdao.saveuserdetails(user);
 			return new ResponseEntity<register>(user,HttpStatus.OK);
 		}
@@ -98,18 +107,31 @@ public class register_controller {
 		{
 			user =new register();
 			user.setErrorMessage("Invalid credentials..Please enter valid credentials");
+			System.out.println("Invalid credentials..Please enter valid credentials");
 			
 		}
 		else
 		{
+		    register user1=regdao.getuserdetailsbyid(user.getUser_id());
+		    user.setFname(user1.getFname());
+		    user.setRole(user1.getRole());
+			System.out.println("Valid user..."+user.getFname()+"Successfully login");
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loggedInUserId", user.getUser_id());
-		}
+					}
 		 
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value="/user/logout",method=RequestMethod.GET)
+	public ResponseEntity<register> logout(HttpSession session)
+	{
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		//setoffLine(loggedInUserId)
+		session.invalidate();
+		System.out.println("Logout user successfully");
+		return new ResponseEntity<register>(HttpStatus.OK);
+	}
 	
 /*	
 	@RequestMapping(value="/saverole", method=RequestMethod.POST)

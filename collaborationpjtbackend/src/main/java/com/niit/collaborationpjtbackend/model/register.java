@@ -3,8 +3,6 @@ package com.niit.collaborationpjtbackend.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -60,22 +58,24 @@ public class register extends BaseDomain {
 	private String createddate;
 	
 	@Column
+	@NotEmpty(message="Please select your role")
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Column
 	private String modifieddate;
 	
 	@Column
 	private String userimage;
 	
-	public role getUser_role() {
-		return user_role;
-	}
-
-	public void setUser_role(role user_role) {
-		this.user_role = user_role;
-	}
-
-	@OneToOne
-	@JoinColumn(name="role_id")
-	private role user_role;
+	
 	
 	public String getModifieddate() {
 		return modifieddate;

@@ -26,7 +26,7 @@ public class jobcarrier_daoimpl implements jobcarrier_dao {
 	@Override
 	public List<jobcarrier> showalljob() {
 		
-		return (List<jobcarrier>)sessionFactory.getCurrentSession().createQuery("from jobcarrier where status='active'").list();
+		return (List<jobcarrier>)sessionFactory.getCurrentSession().createQuery("from jobcarrier where status='Active'").list();
 	}
 
 	@Override

@@ -18,5 +18,10 @@ public interface friends_dao {
 	
 	public void updatefriends(friends friends);
 	
-	public void deletefriends(String id);
+	public void deletefriends(String friendid,String userid);
+	
+	public void setOnline(String userid);
+	
+	public void setOffline(String userid);
+	
 }

@@ -26,6 +26,7 @@ public class register_daoimpl implements register_dao{
 	public void saveuserdetails(register details) {
 		sessionFactory.getCurrentSession().save(details);
 		
+		
 	}
 
 	@Override

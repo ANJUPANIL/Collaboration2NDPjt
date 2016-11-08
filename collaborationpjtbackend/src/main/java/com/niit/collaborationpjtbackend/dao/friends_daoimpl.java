@@ -49,8 +49,10 @@ public class friends_daoimpl implements friends_dao {
 	}
 
 	@Override
-	public void deletefriends(String id) {
-		sessionFactory.getCurrentSession().createQuery("update friends set status=false where fid = '"+id+"'").executeUpdate();
+	public void deletefriends(String freindid,String userid) {
+		friends f=new friends();
+		
+		sessionFactory.getCurrentSession().createQuery("update friends set status=false where fid = '"+freindid+"'").executeUpdate();
 		
 	}
 
@@ -63,6 +65,18 @@ public class friends_daoimpl implements friends_dao {
 		List<friends> list=(List<friends>) query.list();
 		
 		return list;
+	}
+
+	@Override
+	public void setOnline(String userid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOffline(String userid) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -2,28 +2,29 @@
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-	
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 <style type="text/css">
 .navbar-brand {
 	position: relative;
 	z-index: 2;
 }
 
-.navbar-nav.navbar-right .btn {
+.navbar-nav.navbar-right .btn{
 	position: relative;
 	z-index: 2;
 	padding: 4px 20px;
@@ -46,7 +47,7 @@
 	right: 0;
 	bottom: 0;
 	margin: 0;
-	padding-right: 220px;
+	padding-right: 150px;
 	padding-left: 80px;
 	width: 100%;
 }
@@ -113,10 +114,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="navbar-collapse-3">
 				<ul class="nav navbar-nav navbar-right">
+				
 					<li><a href="#/home">Home</a></li>
-
-					<li><a class="btn btn-default btn-outline btn-circle"
-						data-toggle="collapse" href="#/register" aria-expanded="false">Register</a></li>
+					<li><a href="#/register">Register</a></li>
 					<li><a class="btn btn-default btn-outline btn-circle"
 						data-toggle="collapse" href="#nav-collapse2" aria-expanded="false"
 						aria-controls="nav-collapse2">Sign in</a></li>
@@ -136,6 +136,7 @@
 						<button type="submit" class="btn btn-success">Sign in</button>
 					</form>
 				</div>
+				
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -147,16 +148,15 @@
 
 		<hr color="blue" width="100%" size="20">
 		<div class="container">
-			<div ng-view></div>
+			<div  ng-view></div>
 
 		</div>
 	</div>
 	
 	<script src="app.js"></script>
-	
-	<script src="c_home/HomeController.js"></script>
-	<script src="c_user/UserController.js"></script>
-	<script src="c_user/UserService.js"></script>
+	<script ng-src="c_home/HomeController.js"></script>
+	<script ng-src="c_user/UserController.js"></script>
+	<script ng-src="c_user/UserService.js"></script>
 	
 </body>
 </html>

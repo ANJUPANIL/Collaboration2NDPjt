@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +26,12 @@ public class jobcarrier_controller {
 	public ResponseEntity<List<jobcarrier>> listallusers()
 	{
 		List<jobcarrier> jobs =jobdao.showalljob();
+		
 		if(jobs.size()==0)
 		{
 			return new ResponseEntity<List<jobcarrier>>(HttpStatus.NO_CONTENT);
 		}
+		System.out.println("Jobs size" + jobs.size());
 		return new ResponseEntity<List<jobcarrier>>(jobs,HttpStatus.OK);
 		
 	}
@@ -36,7 +39,7 @@ public class jobcarrier_controller {
 	@RequestMapping(value="/savejob/", method=RequestMethod.POST)
 	public ResponseEntity<jobcarrier> createuser(@RequestBody jobcarrier job)
 	{
-		
+			job.setStatus("New");
 			jobdao.savejob(job);
 			job.setErrorMessage("job posted successfully.....");
 			return new ResponseEntity<jobcarrier>(job,HttpStatus.OK);

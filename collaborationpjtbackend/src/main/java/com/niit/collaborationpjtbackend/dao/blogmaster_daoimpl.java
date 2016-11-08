@@ -26,7 +26,7 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 	@Override
 	public List<blogmaster> showallblog() {
 		
-		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster where status='Approved'").list();
+		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster").list();
 	}
 
 	@Override

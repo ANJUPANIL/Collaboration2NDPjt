@@ -65,7 +65,7 @@ public class friends_controller {
 	public ResponseEntity<friends> deleteuser(@PathVariable("id") String id)
 	{
 		
-		friendsdao.deletefriends(id);
+		//friendsdao.deletefriends(id,uid);
 		
 		return new ResponseEntity<friends>(HttpStatus.OK);
 		

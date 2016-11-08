@@ -1,6 +1,11 @@
 package com.niit.collaborationpjtbackend.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +39,19 @@ public class blog_controller {
 	}
 	
 	@RequestMapping(value="/saveblog/", method=RequestMethod.POST)
-	public ResponseEntity<blogmaster> createuser(@RequestBody blogmaster blog)
+	public ResponseEntity<blogmaster> createuser(@RequestBody blogmaster blog,HttpSession session)
 	{
-		
-			blogdao.saveblog(blog);
-			blog.setErrorMessage("Blog posted successfully.....");
-			return new ResponseEntity<blogmaster>(blog,HttpStatus.OK);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		String cdate=dateFormat.format(date);
+		blog.setBlog_date(cdate);
+		blog.setStatus("New");
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		blog.setUser(loggedInUserId);
+		blogdao.saveblog(blog);
+		blog.setErrorMessage("Blog posted successfully.....");
+		return new ResponseEntity<blogmaster>(blog,HttpStatus.OK);
 		
 		
 	}
