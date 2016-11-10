@@ -57,8 +57,8 @@ public class blogmaster extends BaseDomain {
 		return user_id;
 	}
 
-	public void setUser(String user) {
-		this.user_id = user;
+	public void setUser(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getStatus() {

@@ -12,6 +12,8 @@ public interface blogmaster_dao {
 	
 	public List<blogmaster> showallblog();
 	
+	public List<blogmaster> showallpendinblog();
+	
 	public blogmaster getblogbyid(String id);
 	
 	public void updateblog(blogmaster blog);
@@ -19,4 +21,6 @@ public interface blogmaster_dao {
 	public void deleteblog(String id);
 	
 	public void adminapprove(String id);
+	
+	public void adminreject(String id);
 }

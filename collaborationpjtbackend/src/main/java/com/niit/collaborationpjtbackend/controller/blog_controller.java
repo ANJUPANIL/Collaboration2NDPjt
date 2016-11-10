@@ -38,6 +38,21 @@ public class blog_controller {
 		
 	}
 	
+	@RequestMapping(value="/allpendingblogs", method=RequestMethod.GET)
+	public ResponseEntity<List<blogmaster>> listallpendingblogs()
+	{
+		List<blogmaster> blogs =blogdao.showallpendinblog();
+		System.out.println("Pending blog user id"+blogs.get(0).getUser());
+		if(blogs.size()==0)
+		{
+			return new ResponseEntity<List<blogmaster>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<blogmaster>>(blogs,HttpStatus.OK);
+		
+	}
+	
+	
+	
 	@RequestMapping(value="/saveblog/", method=RequestMethod.POST)
 	public ResponseEntity<blogmaster> createuser(@RequestBody blogmaster blog,HttpSession session)
 	{
@@ -46,7 +61,7 @@ public class blog_controller {
 		System.out.println(dateFormat.format(date));
 		String cdate=dateFormat.format(date);
 		blog.setBlog_date(cdate);
-		blog.setStatus("New");
+		blog.setStatus("Newpost");
 		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
 		blog.setUser(loggedInUserId);
 		blogdao.saveblog(blog);
@@ -81,11 +96,20 @@ public class blog_controller {
 	{
 		
 		blogdao.adminapprove(id);
-		
+		System.out.println("Approved blog  " + id);
 		return new ResponseEntity<blogmaster>(HttpStatus.OK);
 		
 	}
 	
+	@RequestMapping(value="/adminreject/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<blogmaster> adminreject(@PathVariable("id") String id)
+	{
+		
+		blogdao.adminreject(id);
+		System.out.println("Rejected blog  " + id);
+		return new ResponseEntity<blogmaster>(HttpStatus.OK);
+		
+	}
 	
 	@RequestMapping(value="/showblogbyid/{id}", method=RequestMethod.GET)
 	public ResponseEntity<blogmaster> getuser(@PathVariable("id") String id)

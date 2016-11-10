@@ -21,8 +21,11 @@ public interface register_dao {
 	
 	public void updatepassword(String userid,String password);
 	
-	public void saverole(role role);
+	public List<register> pendingregister();
 	
+	public void registerapprove(String id);
+	
+	public void registerreject(String id);
 	
 
 }

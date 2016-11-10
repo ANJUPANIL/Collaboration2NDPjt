@@ -19,7 +19,7 @@ public class register_daoimpl implements register_dao{
 	@SuppressWarnings("unchecked" )
 	@Override
 	public List<register> alluserdetails() {
-		return (List<register>)sessionFactory.getCurrentSession().createQuery("from register").list();
+		return (List<register>)sessionFactory.getCurrentSession().createQuery("from register where status='Approved'").list();
 	}
 
 	@Override
@@ -78,8 +78,21 @@ public class register_daoimpl implements register_dao{
 	}
 
 	@Override
-	public void saverole(role role) {
-		sessionFactory.getCurrentSession().save(role);
+	public void registerapprove(String id) {
+		sessionFactory.getCurrentSession().createQuery("update register set status='Rejected' where user_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void registerreject(String id) {
+		sessionFactory.getCurrentSession().createQuery("update register set status='Rejected' where user_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@SuppressWarnings("unchecked" )
+	@Override
+	public List<register> pendingregister() {
+		return (List<register>)sessionFactory.getCurrentSession().createQuery("from register where status='New'").list();
 	}
 
 	

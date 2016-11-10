@@ -53,11 +53,12 @@ public class jobcarrier_controller {
 		//System.out.println("Update user :" + id);
 		
 		System.out.println("Update user name :" + job.getJob_companyname());
+		job.setStatus("Active");
 		jobdao.updatejob(job);
 		return new ResponseEntity<jobcarrier>(job,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/deletejob/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/deletejob/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<jobcarrier> deleteuser(@PathVariable("id") String id)
 	{
 		

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.register_dao;
+import com.niit.collaborationpjtbackend.model.blogmaster;
 import com.niit.collaborationpjtbackend.model.register;
 
 @RestController
@@ -28,6 +29,18 @@ public class register_controller {
 	public ResponseEntity<List<register>> listallusers()
 	{
 		List<register> users =regdao.alluserdetails();
+		if(users.isEmpty())
+		{
+			return new ResponseEntity<List<register>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<register>>(users,HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/allpendingregister", method=RequestMethod.GET)
+	public ResponseEntity<List<register>> listallpendingusers()
+	{
+		List<register> users =regdao.pendingregister();
 		if(users.isEmpty())
 		{
 			return new ResponseEntity<List<register>>(HttpStatus.NO_CONTENT);
@@ -113,12 +126,20 @@ public class register_controller {
 		else
 		{
 		    register user1=regdao.getuserdetailsbyid(user.getUser_id());
-		    user.setFname(user1.getFname());
-		    user.setRole(user1.getRole());
-			System.out.println("Valid user..."+user.getFname()+"Successfully login");
-			session.setAttribute("loggedInUser", user);
-			session.setAttribute("loggedInUserId", user.getUser_id());
-					}
+		    if(user1.getStatus().equals("Approved"))
+		    {
+		    	user.setFname(user1.getFname());
+			    user.setRole(user1.getRole());
+				System.out.println("Valid user..."+user.getFname()+"Successfully login");
+				session.setAttribute("loggedInUser", user);
+				session.setAttribute("loggedInUserId", user.getUser_id());
+		    }
+		    else
+		    {
+		    	user.setErrorMessage("Your registration is not get approved...Please try again later");
+		    }
+		    
+		}
 		 
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
@@ -133,6 +154,25 @@ public class register_controller {
 		return new ResponseEntity<register>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/registerapprove/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<register> adminapprove(@PathVariable("id") String id)
+	{
+		
+		regdao.registerapprove(id);
+		System.out.println("Approved register" + id);
+		return new ResponseEntity<register>(HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/registerreject/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<register> adminreject(@PathVariable("id") String id)
+	{
+		
+		regdao.registerreject(id);
+		System.out.println("Rejected register" + id);
+		return new ResponseEntity<register>(HttpStatus.OK);
+		
+	}
 /*	
 	@RequestMapping(value="/saverole", method=RequestMethod.POST)
 	public ResponseEntity<role> saverole(@RequestBody role r)
