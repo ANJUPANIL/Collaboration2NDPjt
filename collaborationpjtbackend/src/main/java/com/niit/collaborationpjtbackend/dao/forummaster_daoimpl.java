@@ -26,7 +26,7 @@ public class forummaster_daoimpl implements forummaster_dao {
 	@Override
 	public List<forummaster> showallforum() {
 		
-		return (List<forummaster>)sessionFactory.getCurrentSession().createQuery("from forummaster where status='active'").list();
+		return (List<forummaster>)sessionFactory.getCurrentSession().createQuery("from forummaster").list();
 	}
 
 	@Override
@@ -44,6 +44,18 @@ public class forummaster_daoimpl implements forummaster_dao {
 	@Override
 	public void deleteforum(String id) {
 		sessionFactory.getCurrentSession().createQuery("update forummaster set status='decative' where forum_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void forumlikes(String id) {
+		sessionFactory.getCurrentSession().createQuery("update forummaster set forum_likes=forum_likes+1 where forum_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void forumdislikes(String id) {
+		sessionFactory.getCurrentSession().createQuery("update forummaster set forum_dislikes=forum_dislikes+1 where forum_id = '"+id+"'").executeUpdate();
 		
 	}
 

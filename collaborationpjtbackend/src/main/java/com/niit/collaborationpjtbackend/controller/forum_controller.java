@@ -1,6 +1,11 @@
 package com.niit.collaborationpjtbackend.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.forummaster_dao;
-import com.niit.collaborationpjtbackend.model.blogmaster;
+import com.niit.collaborationpjtbackend.model.forummaster;
 import com.niit.collaborationpjtbackend.model.forummaster;
 
 @RestController
@@ -34,9 +39,16 @@ public class forum_controller {
 	}
 	
 	@RequestMapping(value="/saveforum/", method=RequestMethod.POST)
-	public ResponseEntity<forummaster> createuser(@RequestBody forummaster forum)
+	public ResponseEntity<forummaster> createuser(@RequestBody forummaster forum,HttpSession session)
 	{
-		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		String cdate=dateFormat.format(date);
+		forum.setForum_date(cdate);
+		forum.setStatus("Newpost");
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		forum.setUser_id(loggedInUserId);
 			forumdao.saveforum(forum);
 			forum.setErrorMessage("forum posted successfully.....");
 			return new ResponseEntity<forummaster>(forum,HttpStatus.OK);
@@ -73,5 +85,21 @@ public class forum_controller {
 		return new ResponseEntity<forummaster>(forum,HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value="/forumlike/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<forummaster> forumlike(@PathVariable("id") String id)
+	{
+		System.out.println("forum like :" + id);
+		forumdao.forumlikes(id);
+		return new ResponseEntity<forummaster>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/forumdislike/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<forummaster> forumdislike(@PathVariable("id") String id)
+	{
+		System.out.println("forum dislike :" + id);
+		forumdao.forumdislikes(id);
+		return new ResponseEntity<forummaster>(HttpStatus.OK);
+	}
 
 }

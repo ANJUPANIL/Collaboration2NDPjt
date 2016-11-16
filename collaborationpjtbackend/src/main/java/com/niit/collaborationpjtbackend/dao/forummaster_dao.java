@@ -17,4 +17,8 @@ public interface forummaster_dao {
 	public void updateforum(forummaster forum);
 	
 	public void deleteforum(String id);
+	
+	public void forumlikes(String id);
+	
+	public void forumdislikes(String id);
 }

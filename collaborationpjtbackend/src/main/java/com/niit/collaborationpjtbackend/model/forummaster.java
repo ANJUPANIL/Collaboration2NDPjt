@@ -33,7 +33,44 @@ public class forummaster extends BaseDomain{
 	@NotEmpty(message="Please enter a valid forum date")
 	private String forum_date;
 	
+	@Column
+	@NotEmpty
+	private String status;
 	
+	@Column
+	@NotEmpty(message="Please enter a valid user id ")
+	private String user_id;
+	
+	private int forum_likes;
+	
+	private int forum_dislikes;
+
+	
+	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public int getForum_likes() {
+		return forum_likes;
+	}
+
+	public void setForum_likes(int forum_likes) {
+		this.forum_likes = forum_likes;
+	}
+
+	public int getForum_dislikes() {
+		return forum_dislikes;
+	}
+
+	public void setForum_dislikes(int forum_dislikes) {
+		this.forum_dislikes = forum_dislikes;
+	}
+
 	public String getForum_id() {
 		return forum_id;
 	}
@@ -74,22 +111,7 @@ public class forummaster extends BaseDomain{
 		this.status = status;
 	}
 
-	public register getUser() {
-		return user;
-	}
-
-	public void setUser(register user) {
-		this.user = user;
-	}
-
-	@Column
-	@NotEmpty
-	private String status;
 	
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private register user;
-
 	public forummaster() {
 		this.forum_id = "FRM" + UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
