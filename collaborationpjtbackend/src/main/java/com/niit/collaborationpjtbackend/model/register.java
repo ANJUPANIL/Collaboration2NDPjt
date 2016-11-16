@@ -76,7 +76,6 @@ public class register extends BaseDomain {
 	private String userimage;
 	
 	
-	
 	public String getModifieddate() {
 		return modifieddate;
 	}

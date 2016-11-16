@@ -23,4 +23,11 @@ public interface blogmaster_dao {
 	public void adminapprove(String id);
 	
 	public void adminreject(String id);
+	
+	public void bloglikes(String id);
+	
+	public void blogdislikes(String id);
+	
+	
+	
 }

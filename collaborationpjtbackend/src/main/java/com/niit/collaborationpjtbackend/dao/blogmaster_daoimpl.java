@@ -26,7 +26,7 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 	@Override
 	public List<blogmaster> showallblog() {
 		
-		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster where status='Approved'").list();
+		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster").list();
 	}
 
 	@Override
@@ -62,6 +62,18 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 	@Override
 	public void adminreject(String id) {
 		sessionFactory.getCurrentSession().createQuery("update blogmaster set status='Rejected' where blog_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void bloglikes(String id) {
+		sessionFactory.getCurrentSession().createQuery("update blogmaster set blog_likes=blog_likes+1 where blog_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void blogdislikes(String id) {
+		sessionFactory.getCurrentSession().createQuery("update blogmaster set blog_dislikes=blog_dislikes+1 where blog_id = '"+id+"'").executeUpdate();
 		
 	}
 

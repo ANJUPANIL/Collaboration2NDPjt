@@ -79,8 +79,9 @@ public class register_daoimpl implements register_dao{
 
 	@Override
 	public void registerapprove(String id) {
-		sessionFactory.getCurrentSession().createQuery("update register set status='Rejected' where user_id = '"+id+"'").executeUpdate();
-		
+		System.out.println("Approve user dao impl " + id);
+	
+		sessionFactory.getCurrentSession().createQuery("update register set status='Approved' where user_id='"+id+"'").executeUpdate();
 	}
 
 	@Override

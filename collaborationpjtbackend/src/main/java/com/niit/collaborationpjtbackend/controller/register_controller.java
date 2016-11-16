@@ -98,18 +98,23 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/user/{id}", method=RequestMethod.GET,produces={"application/json","application/xml"})
 	public ResponseEntity<register> getuser(@PathVariable("id") String id)
 	{
-		register user=regdao.getuserdetailsbyid(id);
-		if(user==null)
+		System.out.println(" And FreindID " +id);
+		String f=id + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And FreindID " +f);
+		register u=regdao.getuserdetailsbyid(f);
+		
+		if(u==null)
 		{
-			user =new register();
-			user.setErrorMessage("User does not exist with id : "+user.getUser_id());
-			return new ResponseEntity<register>(user,HttpStatus.NOT_FOUND);
+			u =new register();
+			u.setErrorMessage("User does not exist with id : "+u.getUser_id());
+			System.out.println("user not found");
+			return new ResponseEntity<register>(u,HttpStatus.NOT_FOUND);
 		}
-		 
-		return new ResponseEntity<register>(user,HttpStatus.OK);
+		System.out.println("user  found " + u.getFname());
+		return new ResponseEntity<register>(u,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
@@ -158,8 +163,13 @@ public class register_controller {
 	public ResponseEntity<register> adminapprove(@PathVariable("id") String id)
 	{
 		
-		regdao.registerapprove(id);
 		System.out.println("Approved register" + id);
+		String rid=id + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And RID " +rid);
+	
+		
+		regdao.registerapprove(rid);
+		
 		return new ResponseEntity<register>(HttpStatus.OK);
 		
 	}
@@ -167,8 +177,11 @@ public class register_controller {
 	@RequestMapping(value="/registerreject/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<register> adminreject(@PathVariable("id") String id)
 	{
-		
-		regdao.registerreject(id);
+		System.out.println("Approved register" + id);
+		String rid=id + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And RID " +rid);
+	
+		regdao.registerreject(rid);
 		System.out.println("Rejected register" + id);
 		return new ResponseEntity<register>(HttpStatus.OK);
 		

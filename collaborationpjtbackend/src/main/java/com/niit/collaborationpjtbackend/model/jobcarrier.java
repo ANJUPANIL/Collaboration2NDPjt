@@ -46,6 +46,7 @@ public class jobcarrier extends BaseDomain{
 	@NotEmpty(message="Please enter a valid job role")
 	private String job_companyname;
 	
+	
 	@Column
 	@NotEmpty
 	private String status;

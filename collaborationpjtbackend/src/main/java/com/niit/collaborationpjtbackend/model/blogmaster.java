@@ -43,8 +43,39 @@ public class blogmaster extends BaseDomain {
 	@NotEmpty(message="Please enter a valid user id ")
 	private String user_id;
 	
+	private int blog_likes;
+	
+	private int blog_dislikes;
+	
+	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	
+
 	public String getBlog_date() {
 		return blog_date;
+	}
+
+	public int getBlog_likes() {
+		return blog_likes;
+	}
+
+	public void setBlog_likes(int blog_likes) {
+		this.blog_likes = blog_likes;
+	}
+
+	public int getBlog_dislikes() {
+		return blog_dislikes;
+	}
+
+	public void setBlog_dislikes(int blog_dislikes) {
+		this.blog_dislikes = blog_dislikes;
 	}
 
 	public void setBlog_date(String blog_date) {

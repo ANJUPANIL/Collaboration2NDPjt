@@ -1,5 +1,8 @@
 package com.niit.collaborationpjtbackend.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -40,13 +43,27 @@ public class friends_controller {
 		
 	}
 	
-	@RequestMapping(value="/savefriends/", method=RequestMethod.POST)
-	public ResponseEntity<friends> createuser(@RequestBody friends friends)
-	{
-		
-			friendsdao.savefriends(friends);
-			friends.setErrorMessage("friends posted successfully.....");
-			return new ResponseEntity<friends>(friends,HttpStatus.OK);
+	@RequestMapping(value="/savefriends/{friendID}", method=RequestMethod.GET)
+	public ResponseEntity<friends> createuser(@PathVariable("friendID") String friendID,HttpSession session)
+	{	
+		System.out.println("Freind save controller");
+		System.out.println(" And FreindID " +friendID);
+		String f=friendID + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And FreindID " +f);
+		friends friends=new friends();
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		String cdate=dateFormat.format(date);
+		friends.setUserid(loggedInUserId);
+		friends.setRequestto(f);
+		friends.setRequesteddate(cdate);
+		friends.setFollow("No");
+		friends.setStatus("New");
+		friendsdao.savefriends(friends);
+		friends.setErrorMessage("Friend request posted successfully.....");
+		return new ResponseEntity<friends>(HttpStatus.OK);
 		
 		
 	}
@@ -86,16 +103,19 @@ public class friends_controller {
 	
 	
 	
-	@RequestMapping(value="/getfriendbyid/{id}", method=RequestMethod.GET)
-	public ResponseEntity<List<friends>> getnewfriends(@PathVariable("id") String id)
+	/*@RequestMapping(value="/getfriendbyid/{friendID}", method=RequestMethod.GET)
+	public ResponseEntity<friends> getfriendbyid(@PathVariable("friendID") String friendID)
 	{
-		
-		List<friends> friends =friendsdao.showallfriends(id);
-		if(friends.size()==0)
+		System.out.println(" And FreindID " +friendID);
+		String f=friendID + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And FreindID " +f);
+		friends lsts =friendsdao.getfriendbyid(f);
+		//System.out.println("GEt friend by id "+lsts.getUserid());
+		if(lsts==null)
 		{
-			return new ResponseEntity<List<friends>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<friends>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<friends>>(friends,HttpStatus.OK);
-	}
+		return new ResponseEntity<friends>(lsts,HttpStatus.OK);
+	}*/
 
 }

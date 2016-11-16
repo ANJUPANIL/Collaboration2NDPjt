@@ -23,7 +23,7 @@ public class friends extends BaseDomain{
 	
 	@Column
 	@NotEmpty(message="Please enter a valid user")
-	private String requestfrom;
+	private String requestto;
 	
 	@Column
 	@NotEmpty(message="Please enter a valid user")
@@ -52,17 +52,15 @@ public class friends extends BaseDomain{
 	}
 
 
-	public String getRequestfrom() {
-		return requestfrom;
+
+	public String getRequestto() {
+		return requestto;
 	}
 
 
-	public void setRequestfrom(String requestfrom) {
-		this.requestfrom = requestfrom;
+	public void setRequestto(String requestto) {
+		this.requestto = requestto;
 	}
-
-
-	
 
 
 	public String getUserid() {

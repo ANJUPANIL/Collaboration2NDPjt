@@ -120,5 +120,20 @@ public class blog_controller {
 		return new ResponseEntity<blogmaster>(blog,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/bloglike/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<blogmaster> bloglike(@PathVariable("id") String id)
+	{
+		System.out.println("blog like :" + id);
+		blogdao.bloglikes(id);
+		return new ResponseEntity<blogmaster>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value="/blogdislike/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<blogmaster> blogdislike(@PathVariable("id") String id)
+	{
+		System.out.println("blog dislike :" + id);
+		blogdao.blogdislikes(id);
+		return new ResponseEntity<blogmaster>(HttpStatus.OK);
+	}
 
 }
