@@ -60,7 +60,7 @@ public class friends_daoimpl implements friends_dao {
 	@Override
 	public List<friends> shownewfriendrequests(String userid) {
 		
-		String hql="from friends where userid"+ "'" + userid +"' and status ='" +"New'";
+		String hql="from friends where requestto ="+ "'" + userid +"' and status ='" +"New'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<friends> list=(List<friends>) query.list();
 		

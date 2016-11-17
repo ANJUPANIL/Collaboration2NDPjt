@@ -101,7 +101,19 @@ public class friends_controller {
 		
 	}
 	
-	
+	@RequestMapping(value="/getmyfriendrequest", method=RequestMethod.GET)
+	public ResponseEntity<List<friends>> listallfriendrequest(HttpSession session)
+	{
+		register loggedInUser=(register) session.getAttribute("loggedInUser");
+		System.out.println("loggedInUser "+loggedInUser.getUser_id());
+		List<friends> friends =friendsdao.shownewfriendrequests(loggedInUser.getUser_id());
+		if(friends.size()==0)
+		{
+			return new ResponseEntity<List<friends>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<friends>>(friends,HttpStatus.OK);
+		
+	}
 	
 	/*@RequestMapping(value="/getfriendbyid/{friendID}", method=RequestMethod.GET)
 	public ResponseEntity<friends> getfriendbyid(@PathVariable("friendID") String friendID)

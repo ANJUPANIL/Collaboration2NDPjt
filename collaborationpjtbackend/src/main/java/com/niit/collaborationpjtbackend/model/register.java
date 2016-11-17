@@ -10,9 +10,13 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 @Entity
 @Table(name="Register")
 @Component
+
+
 public class register extends BaseDomain {
 	
 	@Id

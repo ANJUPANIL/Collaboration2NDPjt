@@ -98,23 +98,25 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.GET,produces={"application/json","application/xml"})
+	@RequestMapping(value="/user/{id}", method=RequestMethod.GET,produces="application/json")
 	public ResponseEntity<register> getuser(@PathVariable("id") String id)
 	{
 		System.out.println(" And FreindID " +id);
 		String f=id + ".com";   //Bcoz .com is not acceptable
 		System.out.println(" And FreindID " +f);
-		register u=regdao.getuserdetailsbyid(f);
 		
-		if(u==null)
+		//register u=regdao.getuserdetailsbyid(f);
+		register regobj=regdao.getuserdetailsbyid(f);
+		if(regobj==null)
 		{
-			u =new register();
-			u.setErrorMessage("User does not exist with id : "+u.getUser_id());
+			regobj =new register();
+			regobj.setErrorMessage("User does not exist with id : "+regobj.getUser_id());
 			System.out.println("user not found");
-			return new ResponseEntity<register>(u,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<register>(regobj,HttpStatus.NOT_FOUND);
 		}
-		System.out.println("user  found " + u.getFname());
-		return new ResponseEntity<register>(u,HttpStatus.OK);
+		System.out.println("user  found " + regobj.getFname());
+		regobj.setErrorMessage("true");
+		return new ResponseEntity<register>(regobj,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
