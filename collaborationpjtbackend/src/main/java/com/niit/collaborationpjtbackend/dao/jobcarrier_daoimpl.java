@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.collaborationpjtbackend.model.jobbookmark;
 import com.niit.collaborationpjtbackend.model.jobcarrier;
 
 @Repository
@@ -46,5 +47,26 @@ public class jobcarrier_daoimpl implements jobcarrier_dao {
 		sessionFactory.getCurrentSession().createQuery("update jobcarrier set status='decative' where job_id = '"+id+"'").executeUpdate();
 		
 	}
+
+	@Override
+	public void makebookmark(jobbookmark job) {
+		sessionFactory.getCurrentSession().save(job);
+		
+	}
+
+	@SuppressWarnings("unchecked" )
+	@Override
+	public List<jobbookmark> getallbookmarks() {
+		return (List<jobbookmark>)sessionFactory.getCurrentSession().createQuery("from jobbookmark where status='New'").list();
+	}
+
+	@SuppressWarnings("unchecked" )
+	@Override
+	public List<jobbookmark> getbookmarkbyuser(String userid) {
+		return (List<jobbookmark>)sessionFactory.getCurrentSession().createQuery("from jobbookmark where user_id='"+userid+"'").list();
+	}
+
+	
+
 
 }

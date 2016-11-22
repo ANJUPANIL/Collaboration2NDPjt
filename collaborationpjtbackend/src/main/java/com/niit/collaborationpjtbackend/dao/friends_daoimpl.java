@@ -27,7 +27,7 @@ public class friends_daoimpl implements friends_dao {
 	@Override
 	public List<friends> showallfriends(String userid) {
 		
-		String hql="from friends where userid"+ "'" + userid +"' and status='"+"Accepted'";
+		String hql="from friends where userid="+ "'" + userid +"' and status='"+"Accepted'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<friends> list=(List<friends>) query.list();
 		
@@ -52,7 +52,7 @@ public class friends_daoimpl implements friends_dao {
 	public void deletefriends(String freindid,String userid) {
 		friends f=new friends();
 		
-		sessionFactory.getCurrentSession().createQuery("update friends set status=false where fid = '"+freindid+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update friends set status=false where fid = '"+freindid+"' and ").executeUpdate();
 		
 	}
 
@@ -76,6 +76,18 @@ public class friends_daoimpl implements friends_dao {
 	@Override
 	public void setOffline(String userid) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void acceptfriendrequest(String id) {
+		sessionFactory.getCurrentSession().createQuery("update friends set status='Accepted' where fid = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void deletefriendrequest(String id) {
+		sessionFactory.getCurrentSession().createQuery("update friends set status='Rejected' where fid = '"+id+"'").executeUpdate();
 		
 	}
 

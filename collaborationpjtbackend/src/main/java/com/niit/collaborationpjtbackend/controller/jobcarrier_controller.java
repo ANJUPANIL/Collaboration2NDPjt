@@ -2,6 +2,8 @@ package com.niit.collaborationpjtbackend.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.jobcarrier_dao;
+import com.niit.collaborationpjtbackend.model.jobbookmark;
 import com.niit.collaborationpjtbackend.model.jobcarrier;
 import com.niit.collaborationpjtbackend.model.register;
 
@@ -76,5 +79,52 @@ public class jobcarrier_controller {
 		 
 		return new ResponseEntity<jobcarrier>(job,HttpStatus.OK);
 	}
-
+	
+	@RequestMapping(value="/makebookmark/{id}", method=RequestMethod.POST)
+	public ResponseEntity<jobbookmark> makebookmark(@PathVariable("id") String id,HttpSession session)
+	{
+			int flag=0;
+			jobbookmark job=new jobbookmark();
+			String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+			
+			
+			List<jobbookmark> t=jobdao.getbookmarkbyuser(loggedInUserId);
+			for(int i=0;i<t.size();i++)
+			{
+				if(t.get(i).getJob_id().equals(id) && t.get(i).getUser_id().equals(loggedInUserId))
+				{
+					flag=1;
+				}
+			}
+			if(flag==1)
+			{
+				job.setErrorMessage("Already bookmarked job.....");
+				
+			}
+			else{
+				job.setJob_id(id);
+				job.setUser_id(loggedInUserId);
+				job.setStatus("New");
+				jobdao.makebookmark(job);
+				job.setErrorMessage("job bookmarked successfully.....");
+			}
+			
+			return new ResponseEntity<jobbookmark>(job,HttpStatus.OK);
+		
+		
+	}
+	
+	@RequestMapping(value="/allbookmark", method=RequestMethod.GET)
+	public ResponseEntity<List<jobbookmark>> listallbookmark()
+	{
+		List<jobbookmark> jobs =jobdao.getallbookmarks();
+		
+		if(jobs.size()==0)
+		{
+			return new ResponseEntity<List<jobbookmark>>(HttpStatus.NO_CONTENT);
+		}
+		System.out.println("Jobs bookmark size" + jobs.size());
+		return new ResponseEntity<List<jobbookmark>>(jobs,HttpStatus.OK);
+		
+	}
 }

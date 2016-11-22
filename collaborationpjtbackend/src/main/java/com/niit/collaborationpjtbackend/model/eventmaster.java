@@ -38,55 +38,112 @@ public class eventmaster extends BaseDomain{
 	private String event_date;
 	
 	@Column
-	@NotEmpty(message="Please enter a valid event image")
 	private String event_image;
 	
-	@Column
-	@NotEmpty
-	private String status;
-	
-	
+	public String getEvent_id() {
+		return event_id;
+	}
 
-	public String getevent_date() {
+
+
+
+	public void setEvent_id(String event_id) {
+		this.event_id = event_id;
+	}
+
+
+
+
+	public String getEvent_title() {
+		return event_title;
+	}
+
+
+
+
+	public void setEvent_title(String event_title) {
+		this.event_title = event_title;
+	}
+
+
+
+
+	public String getEvent_content() {
+		return event_content;
+	}
+
+
+
+
+	public void setEvent_content(String event_content) {
+		this.event_content = event_content;
+	}
+
+
+
+
+	public String getEvent_venue() {
+		return event_venue;
+	}
+
+
+
+
+	public void setEvent_venue(String event_venue) {
+		this.event_venue = event_venue;
+	}
+
+
+
+
+	public String getEvent_date() {
 		return event_date;
 	}
 
-	public void setevent_date(String event_date) {
+
+
+
+	public void setEvent_date(String event_date) {
 		this.event_date = event_date;
 	}
+
+
+
+
+	public String getEvent_image() {
+		return event_image;
+	}
+
+
+
+
+	public void setEvent_image(String event_image) {
+		this.event_image = event_image;
+	}
+
+
 
 
 	public String getStatus() {
 		return status;
 	}
 
+
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public String getevent_id() {
-		return event_id;
-	}
 
-	public void setevent_id(String event_id) {
-		this.event_id = event_id;
-	}
 
-	public String getevent_title() {
-		return event_title;
-	}
 
-	public void setevent_title(String event_title) {
-		this.event_title = event_title;
-	}
+	@Column
+	@NotEmpty
+	private String status;
+	
+	
 
-	public String getevent_content() {
-		return event_content;
-	}
-
-	public void setevent_content(String event_content) {
-		this.event_content = event_content;
-	}
 	
 	public eventmaster() {
 		this.event_id = "EVNT" + UUID.randomUUID().toString().substring(30).toUpperCase();

@@ -31,10 +31,12 @@ public class friends_controller {
 	friends frd;
 	
 	
-	@RequestMapping(value="/allfriends/{id}", method=RequestMethod.GET)
-	public ResponseEntity<List<friends>> listallusers(@PathVariable("id") String id)
+	@RequestMapping(value="/allfriends", method=RequestMethod.GET)
+	public ResponseEntity<List<friends>> listallusers(HttpSession session)
 	{
-		List<friends> friends =friendsdao.showallfriends(id);
+		register loggedInUser=(register) session.getAttribute("loggedInUser");
+		System.out.println("loggedInUser "+loggedInUser.getUser_id());
+		List<friends> friends =friendsdao.showallfriends(loggedInUser.getUser_id());
 		if(friends.size()==0)
 		{
 			return new ResponseEntity<List<friends>>(HttpStatus.NO_CONTENT);
@@ -88,15 +90,22 @@ public class friends_controller {
 		
 	}
 	
-	@RequestMapping(value="/acceptfriend/{id}", method=RequestMethod.GET)
-	public ResponseEntity<friends> acceptfriend(@PathVariable("id") String id,HttpSession session)
+	@RequestMapping(value="/acceptfriend/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<friends> acceptfriend(@PathVariable("id") String id)
 	{
-		register loggedInUser=(register) session.getAttribute("loggedInUser");
-		frd.setUserid(loggedInUser.getUser_id());
-		frd.setFid(id);
-		//frd.setRequestfrom(requestfrom);
-		//frd.setRequesteddate(requesteddate);
-		frd.setStatus("Accepted");
+		
+		System.out.println("Friend request id  "+ id);
+		friendsdao.acceptfriendrequest(id);
+		return new ResponseEntity<friends>(HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/rejectfriend/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<friends> rejectfriend(@PathVariable("id") String id)
+	{
+		
+		System.out.println("Friend request id  "+ id);
+		friendsdao.deletefriendrequest(id);
 		return new ResponseEntity<friends>(HttpStatus.OK);
 		
 	}

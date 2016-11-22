@@ -79,10 +79,22 @@ public class register extends BaseDomain {
 	@Column
 	private String userimage;
 	
-	
+	@Column
+	private String useronline;
+
+	public String getUseronline() {
+		return useronline;
+	}
+
+	public void setUseronline(String useronline) {
+		this.useronline = useronline;
+	}
+
 	public String getModifieddate() {
 		return modifieddate;
 	}
+
+	
 
 	public void setModifieddate(String modifieddate) {
 		this.modifieddate = modifieddate;

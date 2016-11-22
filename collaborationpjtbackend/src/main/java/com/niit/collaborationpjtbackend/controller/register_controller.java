@@ -60,6 +60,7 @@ public class register_controller {
 			String cdate=dateFormat.format(date);
 			user.setCreateddate(cdate);
 			user.setStatus("New");
+			user.setUseronline("false");
 			regdao.saveuserdetails(user);
 			return new ResponseEntity<register>(user,HttpStatus.OK);
 		}
@@ -98,7 +99,7 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.GET,produces="application/json")
+	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
 	public ResponseEntity<register> getuser(@PathVariable("id") String id)
 	{
 		System.out.println(" And FreindID " +id);
@@ -137,6 +138,7 @@ public class register_controller {
 		    {
 		    	user.setFname(user1.getFname());
 			    user.setRole(user1.getRole());
+			    user.setUseronline("true");
 				System.out.println("Valid user..."+user.getFname()+"Successfully login");
 				session.setAttribute("loggedInUser", user);
 				session.setAttribute("loggedInUserId", user.getUser_id());

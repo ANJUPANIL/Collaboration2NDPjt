@@ -26,7 +26,7 @@ public class eventmaster_daoimpl implements eventmaster_dao {
 	@Override
 	public List<eventmaster> showallevent() {
 		
-		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster where status='active'").list();
+		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster ").list();
 	}
 
 	@Override

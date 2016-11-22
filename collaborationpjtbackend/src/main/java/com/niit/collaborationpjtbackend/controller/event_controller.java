@@ -36,6 +36,9 @@ public class event_controller {
 	public ResponseEntity<eventmaster> createuser(@RequestBody eventmaster event)
 	{
 		
+		System.out.println("Event save");
+			event.setStatus("Active");
+		
 			eventdao.saveevent(event);
 			event.setErrorMessage("event posted successfully.....");
 			return new ResponseEntity<eventmaster>(event,HttpStatus.OK);
@@ -48,7 +51,7 @@ public class event_controller {
 	{
 		//System.out.println("Update user :" + id);
 		
-		System.out.println("Update user name :" + event.getevent_title());
+		//System.out.println("Update user name :" + event.getevent_title());
 		eventdao.updateevent(event);
 		return new ResponseEntity<eventmaster>(event,HttpStatus.OK);
 	}
