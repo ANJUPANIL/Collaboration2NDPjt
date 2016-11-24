@@ -44,7 +44,7 @@ public class jobcarrier_daoimpl implements jobcarrier_dao {
 
 	@Override
 	public void deletejob(String id) {
-		sessionFactory.getCurrentSession().createQuery("update jobcarrier set status='decative' where job_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update jobcarrier set status='Deactive' where job_id = '"+id+"'").executeUpdate();
 		
 	}
 

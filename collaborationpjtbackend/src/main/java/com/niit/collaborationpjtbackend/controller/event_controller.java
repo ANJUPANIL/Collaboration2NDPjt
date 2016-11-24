@@ -56,7 +56,7 @@ public class event_controller {
 		return new ResponseEntity<eventmaster>(event,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/deleteevent/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/deleteevent/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<eventmaster> deleteuser(@PathVariable("id") String id)
 	{
 		

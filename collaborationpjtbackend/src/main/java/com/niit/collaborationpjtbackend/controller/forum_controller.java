@@ -46,7 +46,7 @@ public class forum_controller {
 		System.out.println(dateFormat.format(date));
 		String cdate=dateFormat.format(date);
 		forum.setForum_date(cdate);
-		forum.setStatus("Newpost");
+		forum.setStatus("New");
 		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
 		forum.setUser_id(loggedInUserId);
 			forumdao.saveforum(forum);
@@ -66,7 +66,7 @@ public class forum_controller {
 		return new ResponseEntity<forummaster>(forum,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/deleteforum/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/deleteforum/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<forummaster> deleteuser(@PathVariable("id") String id)
 	{
 		

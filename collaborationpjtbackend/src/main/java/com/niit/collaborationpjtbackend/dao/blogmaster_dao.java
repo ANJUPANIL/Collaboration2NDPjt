@@ -20,6 +20,8 @@ public interface blogmaster_dao {
 	
 	public void deleteblog(String id);
 	
+	public void activeblog(String id);
+	
 	public void adminapprove(String id);
 	
 	public void adminreject(String id);

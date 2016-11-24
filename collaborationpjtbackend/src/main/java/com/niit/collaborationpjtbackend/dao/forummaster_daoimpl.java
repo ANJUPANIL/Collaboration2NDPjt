@@ -43,7 +43,7 @@ public class forummaster_daoimpl implements forummaster_dao {
 
 	@Override
 	public void deleteforum(String id) {
-		sessionFactory.getCurrentSession().createQuery("update forummaster set status='decative' where forum_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update forummaster set status='Decative' where forum_id = '"+id+"'").executeUpdate();
 		
 	}
 

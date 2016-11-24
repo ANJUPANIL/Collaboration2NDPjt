@@ -42,7 +42,7 @@ public class jobcarrier_controller {
 	@RequestMapping(value="/savejob/", method=RequestMethod.POST)
 	public ResponseEntity<jobcarrier> createuser(@RequestBody jobcarrier job)
 	{
-			job.setStatus("New");
+			job.setStatus("Active");
 			jobdao.savejob(job);
 			job.setErrorMessage("job posted successfully.....");
 			return new ResponseEntity<jobcarrier>(job,HttpStatus.OK);

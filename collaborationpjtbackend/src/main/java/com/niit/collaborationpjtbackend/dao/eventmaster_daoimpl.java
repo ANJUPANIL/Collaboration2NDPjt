@@ -26,7 +26,7 @@ public class eventmaster_daoimpl implements eventmaster_dao {
 	@Override
 	public List<eventmaster> showallevent() {
 		
-		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster ").list();
+		return (List<eventmaster>)sessionFactory.getCurrentSession().createQuery("from eventmaster where status='Active'").list();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class eventmaster_daoimpl implements eventmaster_dao {
 
 	@Override
 	public void deleteevent(String id) {
-		sessionFactory.getCurrentSession().createQuery("update eventmaster set status=false where event_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update eventmaster set status='Deactive' where event_id = '"+id+"'").executeUpdate();
 		
 	}
 

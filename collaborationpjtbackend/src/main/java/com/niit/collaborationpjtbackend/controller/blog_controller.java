@@ -81,11 +81,22 @@ public class blog_controller {
 		return new ResponseEntity<blogmaster>(blog,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/deleteblog/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/deleteblog/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<blogmaster> deleteuser(@PathVariable("id") String id)
 	{
 		
 		blogdao.deleteblog(id);
+		
+		return new ResponseEntity<blogmaster>(HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/activeblog/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<blogmaster> activeblog(@PathVariable("id") String id)
+	{
+		
+		blogdao.activeblog(id);
+		
 		
 		return new ResponseEntity<blogmaster>(HttpStatus.OK);
 		

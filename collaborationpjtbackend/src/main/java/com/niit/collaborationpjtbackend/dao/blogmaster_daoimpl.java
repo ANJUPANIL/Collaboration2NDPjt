@@ -43,7 +43,7 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 
 	@Override
 	public void deleteblog(String id) {
-		sessionFactory.getCurrentSession().createQuery("update blogmaster set status='Rejected' where blog_id = '"+id+"'").executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("update blogmaster set status='Deactive' where blog_id = '"+id+"'").executeUpdate();
 		
 	}
 
@@ -56,7 +56,7 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 	@SuppressWarnings("unchecked" )
 	@Override
 	public List<blogmaster> showallpendinblog() {
-		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster where status='Newpost'").list();
+		return (List<blogmaster>)sessionFactory.getCurrentSession().createQuery("from blogmaster where status='New'").list();
 	}
 
 	@Override
@@ -74,6 +74,12 @@ public class blogmaster_daoimpl implements blogmaster_dao {
 	@Override
 	public void blogdislikes(String id) {
 		sessionFactory.getCurrentSession().createQuery("update blogmaster set blog_dislikes=blog_dislikes+1 where blog_id = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void activeblog(String id) {
+		sessionFactory.getCurrentSession().createQuery("update blogmaster set status='Active' where blog_id = '"+id+"'").executeUpdate();
 		
 	}
 
