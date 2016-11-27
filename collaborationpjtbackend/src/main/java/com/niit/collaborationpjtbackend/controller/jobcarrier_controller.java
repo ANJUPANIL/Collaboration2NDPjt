@@ -98,7 +98,7 @@ public class jobcarrier_controller {
 			}
 			if(flag==1)
 			{
-				job.setErrorMessage("Already bookmarked job.....");
+				job.setErrorMessage("Already applied job.....");
 				
 			}
 			else{
@@ -106,7 +106,7 @@ public class jobcarrier_controller {
 				job.setUser_id(loggedInUserId);
 				job.setStatus("New");
 				jobdao.makebookmark(job);
-				job.setErrorMessage("job bookmarked successfully.....");
+				job.setErrorMessage("Applied job successfully.....");
 			}
 			
 			return new ResponseEntity<jobbookmark>(job,HttpStatus.OK);
@@ -115,9 +115,11 @@ public class jobcarrier_controller {
 	}
 	
 	@RequestMapping(value="/allbookmark", method=RequestMethod.GET)
-	public ResponseEntity<List<jobbookmark>> listallbookmark()
+	public ResponseEntity<List<jobbookmark>> listallbookmark(HttpSession session)
 	{
-		List<jobbookmark> jobs =jobdao.getallbookmarks();
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+
+		List<jobbookmark> jobs =jobdao.getbookmarkbyuser(loggedInUserId);
 		
 		if(jobs.size()==0)
 		{

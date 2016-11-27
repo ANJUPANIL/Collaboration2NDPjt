@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.friends_dao;
+import com.niit.collaborationpjtbackend.dao.register_dao;
 import com.niit.collaborationpjtbackend.model.friends;
+import com.niit.collaborationpjtbackend.model.jobbookmark;
 import com.niit.collaborationpjtbackend.model.register;
 
 
@@ -29,6 +31,9 @@ public class friends_controller {
 	friends_dao friendsdao;
 	
 	friends frd;
+	
+	@Autowired
+	register_dao regdao;
 	
 	
 	@RequestMapping(value="/allfriends", method=RequestMethod.GET)
@@ -45,7 +50,7 @@ public class friends_controller {
 		
 	}
 	
-	@RequestMapping(value="/savefriends/{friendID}", method=RequestMethod.GET)
+	@RequestMapping(value="/savefriends/{friendID}", method=RequestMethod.POST)
 	public ResponseEntity<friends> createuser(@PathVariable("friendID") String friendID,HttpSession session)
 	{	
 		System.out.println("Freind save controller");
@@ -54,6 +59,23 @@ public class friends_controller {
 		System.out.println(" And FreindID " +f);
 		friends friends=new friends();
 		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+				
+		int flag=0;
+		List<friends> t=friendsdao.showallfriends(loggedInUserId);
+		for(int i=0;i<t.size();i++)
+		{
+			if(t.get(i).getRequestto().equals(f) && t.get(i).getUserid().equals(loggedInUserId))
+			{
+				flag=1;
+			}
+		}
+		if(flag==1)
+		{
+			friends.setErrorMessage("Already add friend....");
+		}
+		else{
+			
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		System.out.println(dateFormat.format(date));
@@ -64,8 +86,9 @@ public class friends_controller {
 		friends.setFollow("No");
 		friends.setStatus("New");
 		friendsdao.savefriends(friends);
-		friends.setErrorMessage("Friend request posted successfully.....");
-		return new ResponseEntity<friends>(HttpStatus.OK);
+		friends.setErrorMessage("Friend request send successfully.....");
+		}
+		return new ResponseEntity<friends>(friends,HttpStatus.OK);
 		
 		
 	}
@@ -139,4 +162,30 @@ public class friends_controller {
 		return new ResponseEntity<friends>(lsts,HttpStatus.OK);
 	}*/
 
+	
+	@RequestMapping(value="/friendprofile/{friendID}", method=RequestMethod.GET)
+	public ResponseEntity<register> getuser(@PathVariable("friendID") String friendID)
+	{
+		System.out.println(" And FreindID " +friendID);
+		String f=friendID + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And FreindID " +f);
+		
+		//register u=regdao.getuserdetailsbyid(f);
+		
+			
+		
+		register regobj=regdao.getuserdetailsbyid(f);
+			if(regobj==null)
+			{
+				regobj =new register();
+				regobj.setErrorMessage("User does not exist with id : "+regobj.getUser_id());
+				System.out.println("user not found");
+				return new ResponseEntity<register>(regobj,HttpStatus.NOT_FOUND);
+			}
+			System.out.println("user  found " + regobj.getFname());
+			regobj.setErrorMessage("true");
+			return new ResponseEntity<register>(regobj,HttpStatus.OK);
+		
+		
+	}
 }

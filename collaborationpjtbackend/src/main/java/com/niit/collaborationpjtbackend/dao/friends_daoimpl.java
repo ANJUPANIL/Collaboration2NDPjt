@@ -26,8 +26,8 @@ public class friends_daoimpl implements friends_dao {
 	@SuppressWarnings("unchecked" )
 	@Override
 	public List<friends> showallfriends(String userid) {
-		
-		String hql="from friends where userid="+ "'" + userid +"' and status='"+"Accepted'";
+		//(userid='anju@gmail.com' or requestto='anju@gmail.com')
+		String hql="from friends where (userid="+ "'" + userid +"' or requestto='"+userid+"') and status='"+"Accepted'";
 		Query query=sessionFactory.getCurrentSession().createQuery(hql);
 		List<friends> list=(List<friends>) query.list();
 		

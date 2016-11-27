@@ -62,6 +62,7 @@ public class register_controller {
 			user.setStatus("New");
 			user.setUseronline("false");
 			regdao.saveuserdetails(user);
+			user.setErrorMessage("Register successfully...");
 			return new ResponseEntity<register>(user,HttpStatus.OK);
 		}
 		user.setErrorMessage("User already exist with id : " + user.getUser_id()); 
@@ -99,25 +100,38 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
-	public ResponseEntity<register> getuser(@PathVariable("id") String id)
+	@RequestMapping(value="/user", method=RequestMethod.GET)
+	public ResponseEntity<register> getuser(HttpSession session)
 	{
-		System.out.println(" And FreindID " +id);
+		/*System.out.println(" And FreindID " +id);
 		String f=id + ".com";   //Bcoz .com is not acceptable
 		System.out.println(" And FreindID " +f);
 		
-		//register u=regdao.getuserdetailsbyid(f);
-		register regobj=regdao.getuserdetailsbyid(f);
-		if(regobj==null)
+		//register u=regdao.getuserdetailsbyid(f);*/
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		
+			
+		if(loggedInUserId.isEmpty())
 		{
-			regobj =new register();
-			regobj.setErrorMessage("User does not exist with id : "+regobj.getUser_id());
-			System.out.println("user not found");
-			return new ResponseEntity<register>(regobj,HttpStatus.NOT_FOUND);
+			
+			return new ResponseEntity<register>(HttpStatus.NOT_FOUND);
 		}
-		System.out.println("user  found " + regobj.getFname());
-		regobj.setErrorMessage("true");
-		return new ResponseEntity<register>(regobj,HttpStatus.OK);
+		else{
+			
+		
+		register regobj=regdao.getuserdetailsbyid(loggedInUserId);
+			if(regobj==null)
+			{
+				regobj =new register();
+				regobj.setErrorMessage("User does not exist with id : "+regobj.getUser_id());
+				System.out.println("user not found");
+				return new ResponseEntity<register>(regobj,HttpStatus.NOT_FOUND);
+			}
+			System.out.println("user  found " + regobj.getFname());
+			regobj.setErrorMessage("true");
+			return new ResponseEntity<register>(regobj,HttpStatus.OK);
+		
+		}
 	}
 	
 	@RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
