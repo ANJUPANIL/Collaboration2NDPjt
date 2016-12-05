@@ -83,7 +83,7 @@ public class friends_controller {
 		friends.setUserid(loggedInUserId);
 		friends.setRequestto(f);
 		friends.setRequesteddate(cdate);
-		friends.setFollow("No");
+		friends.setFollow("Yes");
 		friends.setStatus("New");
 		friendsdao.savefriends(friends);
 		friends.setErrorMessage("Friend request send successfully.....");
@@ -186,6 +186,26 @@ public class friends_controller {
 			regobj.setErrorMessage("true");
 			return new ResponseEntity<register>(regobj,HttpStatus.OK);
 		
+		
+	}
+	
+	@RequestMapping(value="/unfriend/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<friends> unfriend(@PathVariable("id") String id)
+	{
+		
+		System.out.println("Friend request id  "+ id);
+		friendsdao.unfriend(id);
+		return new ResponseEntity<friends>(HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/unfollow/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<friends> unfollow(@PathVariable("id") String id)
+	{
+		
+		System.out.println("Friend request id  "+ id);
+		friendsdao.unfollow(id);
+		return new ResponseEntity<friends>(HttpStatus.OK);
 		
 	}
 }

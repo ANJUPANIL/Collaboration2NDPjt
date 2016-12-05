@@ -69,14 +69,18 @@ public class register_controller {
 		return new ResponseEntity<register>(user,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<register> updateuser(@PathVariable("id") String id,@RequestBody register user)
+	@RequestMapping(value="/updateuser/",method=RequestMethod.PUT)
+	public ResponseEntity<register> updateuser(@RequestBody register user)
 	{
-		System.out.println("Update user :" + id);
-		if(regdao.getuserdetailsbyid(id)==null)
+		System.out.println("Update user :" + user.getUser_id());
+		System.out.println("Update user address:" +user.getAddress());
+		/*
+		String rid=uid + ".com";   //Bcoz .com is not acceptable
+		System.out.println(" And RID " +rid);*/
+		if(regdao.getuserdetailsbyid(user.getUser_id())==null)
 		{
 			user =new register();
-			user.setErrorMessage("User does not exist with id : "+ id);
+			user.setErrorMessage("User does not exist with id : "+ user.getUser_id());
 			return new ResponseEntity<register>(user,HttpStatus.NOT_FOUND);
 		}
 		System.out.println("Update user name :" + user.getFname());
@@ -152,8 +156,10 @@ public class register_controller {
 		    {
 		    	user.setFname(user1.getFname());
 			    user.setRole(user1.getRole());
-			    user.setUseronline("true");
+			    //user.setUseronline("true");
+			    regdao.setOnline(user1.getUser_id());
 				System.out.println("Valid user..."+user.getFname()+"Successfully login");
+				
 				session.setAttribute("loggedInUser", user);
 				session.setAttribute("loggedInUserId", user.getUser_id());
 		    }
@@ -171,7 +177,7 @@ public class register_controller {
 	public ResponseEntity<register> logout(HttpSession session)
 	{
 		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
-		//setoffLine(loggedInUserId)
+		regdao.setOffline(loggedInUserId);
 		session.invalidate();
 		System.out.println("Logout user successfully");
 		return new ResponseEntity<register>(HttpStatus.OK);

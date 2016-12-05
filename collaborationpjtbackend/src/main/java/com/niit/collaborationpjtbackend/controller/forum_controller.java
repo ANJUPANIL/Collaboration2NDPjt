@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationpjtbackend.dao.forummaster_dao;
 import com.niit.collaborationpjtbackend.model.forummaster;
-import com.niit.collaborationpjtbackend.model.forummaster;
+import com.niit.collaborationpjtbackend.model.forumcomments;
 
 @RestController
 public class forum_controller {
@@ -30,6 +30,12 @@ public class forum_controller {
 	public ResponseEntity<List<forummaster>> listallusers()
 	{
 		List<forummaster> forums =forumdao.showallforum();
+		/*for(int i=0;i<forums.size();i++)
+		{
+			int c=forumdao.commentcount(forums.get(i).getForum_id());
+			String count=Integer.toString(c);
+			forums.get(i).setErrorMessage(count);
+		}*/
 		if(forums.size()==0)
 		{
 			return new ResponseEntity<List<forummaster>>(HttpStatus.NO_CONTENT);
@@ -101,5 +107,44 @@ public class forum_controller {
 		forumdao.forumdislikes(id);
 		return new ResponseEntity<forummaster>(HttpStatus.OK);
 	}
-
+	
+	
+	@RequestMapping(value="/saveforumcomment/",method=RequestMethod.POST)
+	public ResponseEntity<forumcomments> forumcomments(@RequestBody forumcomments forumcom,HttpSession session)
+	{
+		System.out.println("save comment of forum "+ forumcom.getForumid());
+		
+		String loggedInUserId=(String)session.getAttribute("loggedInUserId");
+		forumcom.setUserid(loggedInUserId);
+		forumdao.saveforumcomment(forumcom);
+		
+		return new ResponseEntity<forumcomments>(forumcom,HttpStatus.OK);
+	
+	}
+	
+	
+	@RequestMapping(value="/allforumcomments/{forumid}", method=RequestMethod.GET)
+	public ResponseEntity<List<forumcomments>> listallcomments(@PathVariable("forumid") String forumid)
+	{
+		List<forumcomments> forumcoms =forumdao.showallforumcomments(forumid);
+		if(forumcoms.size()==0)
+		{
+			return new ResponseEntity<List<forumcomments>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<forumcomments>>(forumcoms,HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

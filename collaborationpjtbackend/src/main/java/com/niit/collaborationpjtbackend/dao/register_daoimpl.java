@@ -96,6 +96,18 @@ public class register_daoimpl implements register_dao{
 		return (List<register>)sessionFactory.getCurrentSession().createQuery("from register where status='New'").list();
 	}
 
+	@Override
+	public void setOnline(String userid) {
+		sessionFactory.getCurrentSession().createQuery("update register set useronline='true' where user_id = '"+userid+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void setOffline(String userid) {
+		sessionFactory.getCurrentSession().createQuery("update register set useronline='false' where user_id = '"+userid+"'").executeUpdate();
+		
+	}
+
 	
 
 }

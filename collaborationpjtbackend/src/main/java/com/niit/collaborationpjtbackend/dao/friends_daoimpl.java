@@ -67,17 +67,7 @@ public class friends_daoimpl implements friends_dao {
 		return list;
 	}
 
-	@Override
-	public void setOnline(String userid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setOffline(String userid) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void acceptfriendrequest(String id) {
@@ -88,6 +78,18 @@ public class friends_daoimpl implements friends_dao {
 	@Override
 	public void deletefriendrequest(String id) {
 		sessionFactory.getCurrentSession().createQuery("update friends set status='Rejected' where fid = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void unfriend(String id) {
+		sessionFactory.getCurrentSession().createQuery("update friends set status='Rejected' where fid = '"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void unfollow(String id) {
+		sessionFactory.getCurrentSession().createQuery("update friends set follow='No' where fid = '"+id+"'").executeUpdate();
 		
 	}
 

@@ -27,5 +27,9 @@ public interface register_dao {
 	
 	public void registerreject(String id);
 	
+	public void setOnline(String userid);
+	
+	public void setOffline(String userid);
+	
 
 }

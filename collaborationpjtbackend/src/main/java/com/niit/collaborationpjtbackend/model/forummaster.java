@@ -115,4 +115,6 @@ public class forummaster extends BaseDomain{
 	public forummaster() {
 		this.forum_id = "FRM" + UUID.randomUUID().toString().substring(30).toUpperCase();
 	}
+
+	
 }

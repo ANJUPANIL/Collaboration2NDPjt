@@ -24,8 +24,10 @@ public interface friends_dao {
 	
 	public void deletefriendrequest(String id);
 	
-	public void setOnline(String userid);
+	public void unfriend(String id);
 	
-	public void setOffline(String userid);
+	public void unfollow(String id);
+	
+	
 	
 }

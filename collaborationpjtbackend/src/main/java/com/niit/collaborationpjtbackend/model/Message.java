@@ -7,6 +7,10 @@ public class Message {
 	public int getId() {
 		return id;
 	}
+	public Message()
+	{
+		
+	}
 	
 	public Message(int id,String message){
 		this.id = id;
@@ -17,6 +21,8 @@ public class Message {
 		this.id = id;
 	}
 
+	
+
 	public String getMessage() {
 		return message;
 	}
@@ -26,6 +32,8 @@ public class Message {
 	}
 
 	private String message;
+	
+	
 	
 
 }
